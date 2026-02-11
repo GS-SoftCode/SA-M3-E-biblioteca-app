@@ -206,14 +206,12 @@
 
                 <div class="form-row">
                     <div class="form-group">
-                        <label for="txtTipoMulta">Tipo de Multa <span class="required">*</span></label>
-                        <asp:TextBox ID="txtTipoMulta" runat="server" CssClass="form-control" placeholder="Ej: Retraso, Daño, Pérdida" MaxLength="100"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvTipoMulta" runat="server" 
-                            ControlToValidate="txtTipoMulta" 
-                            ErrorMessage="El tipo de multa es obligatorio" 
-                            ForeColor="#e74c3c" 
-                            Display="Dynamic">
-                        </asp:RequiredFieldValidator>
+                        <label for="ddlTipoMulta">Tipo de Multa <span class="required">*</span></label>
+                        <asp:DropDownList ID="ddlTipoMulta" runat="server" CssClass="form-control">
+                            <asp:ListItem Value="Vencido" Selected="True">Vencido</asp:ListItem>
+                            <asp:ListItem Value="Daño">Daño</asp:ListItem>
+                            <asp:ListItem Value="Pérdida">Pérdida</asp:ListItem>
+                        </asp:DropDownList>
                     </div>
 
                     <div class="form-group">

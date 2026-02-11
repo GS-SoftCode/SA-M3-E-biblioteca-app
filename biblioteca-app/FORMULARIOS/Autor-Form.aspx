@@ -15,7 +15,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #5a67d8;
+            background: #4A90E2;
             min-height: 100vh;
             padding: 20px;
         }
@@ -30,7 +30,7 @@
         }
 
         .header {
-            background: #5a67d8;
+            background: #4A90E2;
             color: white;
             padding: 30px;
             text-align: center;
@@ -95,8 +95,8 @@
 
         .form-control:focus {
             outline: none;
-            border-color: #5a67d8;
-            box-shadow: 0 0 0 3px rgba(90, 103, 216, 0.1);
+            border-color: #4A90E2;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
         }
 
         .button-group {
@@ -119,15 +119,15 @@
         }
 
         .btn-primary {
-            background: #5a67d8;
+            background: #4A90E2;
             color: white;
             flex: 1;
         }
 
         .btn-primary:hover {
-            background: #4c51bf;
+            background: #357ABD;
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(90, 103, 216, 0.4);
+            box-shadow: 0 5px 20px rgba(74, 144, 226, 0.4);
         }
 
         .grid-container {
@@ -143,7 +143,7 @@
         }
 
         .grid-view th {
-            background: #5a67d8;
+            background: #4A90E2;
             color: white;
             padding: 15px;
             text-align: left;
@@ -164,7 +164,7 @@
         }
 
         .grid-view a {
-            color: #5a67d8;
+            color: #4A90E2;
             text-decoration: none;
             margin: 0 5px;
             font-weight: 500;

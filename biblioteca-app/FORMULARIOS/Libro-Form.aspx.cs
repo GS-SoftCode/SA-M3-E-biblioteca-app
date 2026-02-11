@@ -47,25 +47,56 @@ namespace biblioteca_app
             gvLibros.DataBind();
         }
 
+        private bool IsbnExiste(string isbn)
+        {
+            DataTable dt = SqlHelper.ExecuteDataTable(connectionString, CommandType.StoredProcedure, "get_libros");
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row["isbn"].ToString().Trim() == isbn.Trim())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
-                int anio = 0;
-                int.TryParse(txtAnioPublicacion.Text.Trim(), out anio);
+                string isbn = txtIsbn.Text.Trim();
 
-                Libro nuevoLibro = new Libro(
-                    txtTitulo.Text.Trim(),
-                    txtIsbn.Text.Trim(),
-                    txtEditorial.Text.Trim(),
-                    anio,
-                    int.Parse(ddlCategoria.SelectedValue),
-                    int.Parse(ddlAutor.SelectedValue)
-                );
+                // Validar si el ISBN ya existe
+                if (IsbnExiste(isbn))
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "IsbnDuplicado",
+                        "alert('Error: El ISBN " + isbn + " ya está registrado. Por favor, verifique el número ISBN.');", true);
+                    return;
+                }
 
-                nuevoLibro.Save_Libro();
-                LimpiarFormulario();
-                CargarLibros();
+                try
+                {
+                    int anio = 0;
+                    int.TryParse(txtAnioPublicacion.Text.Trim(), out anio);
+
+                    Libro nuevoLibro = new Libro(
+                        txtTitulo.Text.Trim(),
+                        isbn,
+                        txtEditorial.Text.Trim(),
+                        anio,
+                        int.Parse(ddlCategoria.SelectedValue),
+                        int.Parse(ddlAutor.SelectedValue)
+                    );
+
+                    nuevoLibro.Save_Libro();
+                    LimpiarFormulario();
+                    CargarLibros();
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Error",
+                        "alert('Error al guardar el libro: " + ex.Message.Replace("'", "\\'") + "');", true);
+                }
             }
         }
 

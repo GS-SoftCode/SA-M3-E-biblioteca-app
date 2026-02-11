@@ -207,6 +207,7 @@
     <Compile Include="CLASES\libro.cs" />
     <Compile Include="CLASES\multa.cs" />
     <Compile Include="CLASES\prestamo.cs" />
+    <Compile Include="CLASES\reserva.cs" />
     <Compile Include="CLASES\rol.cs" />
     <Compile Include="CLASES\SqlHelper.cs" />
     <Compile Include="CLASES\usuario.cs" />

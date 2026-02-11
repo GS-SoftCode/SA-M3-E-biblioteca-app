@@ -36,22 +36,54 @@ namespace biblioteca_app
             gvUsuarios.DataBind();
         }
 
+        private bool EmailExiste(string email)
+        {
+            DataTable dt = SqlHelper.ExecuteDataTable(connectionString, CommandType.StoredProcedure, "get_usuarios");
+            foreach (DataRow row in dt.Rows)
+            {
+                if (row["email"].ToString().ToLower() == email.ToLower())
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         protected void btnGuardar_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
-                Usuario nuevoUsuario = new Usuario(
-                    txtNombre.Text.Trim(),
-                    txtApellido.Text.Trim(),
-                    txtEmail.Text.Trim(),
-                    txtTelefono.Text.Trim(),
-                    txtDireccion.Text.Trim(),
-                    int.Parse(ddlRol.SelectedValue)
-                );
+                string email = txtEmail.Text.Trim();
 
-                nuevoUsuario.Save_Usuario();
-                LimpiarFormulario();
-                CargarUsuarios();
+                // Validar si el email ya existe
+                if (EmailExiste(email))
+                {
+                    // Mostrar mensaje de error
+                    ScriptManager.RegisterStartupScript(this, GetType(), "EmailDuplicado",
+                        "alert('Error: El email " + email + " ya está registrado. Por favor, use otro correo electrónico.');", true);
+                    return;
+                }
+
+                try
+                {
+                    Usuario nuevoUsuario = new Usuario(
+                        txtNombre.Text.Trim(),
+                        txtApellido.Text.Trim(),
+                        email,
+                        txtTelefono.Text.Trim(),
+                        txtDireccion.Text.Trim(),
+                        int.Parse(ddlRol.SelectedValue)
+                    );
+
+                    nuevoUsuario.Save_Usuario();
+                    LimpiarFormulario();
+                    CargarUsuarios();
+                }
+                catch (Exception ex)
+                {
+                    ScriptManager.RegisterStartupScript(this, GetType(), "Error",
+                        "alert('Error al guardar el usuario: " + ex.Message + "');", true);
+                }
             }
         }
 

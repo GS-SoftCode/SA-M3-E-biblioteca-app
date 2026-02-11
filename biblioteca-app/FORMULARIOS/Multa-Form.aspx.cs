@@ -55,7 +55,7 @@ namespace biblioteca_app
                 decimal.TryParse(txtMonto.Text.Trim(), out monto);
 
                 Multa nuevaMulta = new Multa(
-                    txtTipoMulta.Text.Trim(),
+                    ddlTipoMulta.SelectedValue,
                     monto,
                     txtDescripcion.Text.Trim(),
                     ddlEstado.SelectedValue,
@@ -73,7 +73,7 @@ namespace biblioteca_app
 
         private void LimpiarFormulario()
         {
-            txtTipoMulta.Text = "";
+            ddlTipoMulta.SelectedIndex = 0;
             txtMonto.Text = "";
             txtDescripcion.Text = "";
             ddlUsuario.SelectedIndex = 0;

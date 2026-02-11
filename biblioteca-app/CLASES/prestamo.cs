@@ -43,7 +43,26 @@ namespace biblioteca_app.CLASES
 
             // Ejecutar el stored procedure usando SqlHelper
             object resultado = SqlHelper.ExecuteScalar(connString, CommandType.StoredProcedure, "save_prestamo", Parametros);
-            return resultado != null ? Convert.ToInt32(resultado) : 0;
+            
+            int idPrestamo = resultado != null ? Convert.ToInt32(resultado) : 0;
+            
+            // Si el préstamo se guardó exitosamente, actualizar el estado del ejemplar
+            if (idPrestamo > 0)
+            {
+                ActualizarEstadoEjemplar(connString, IdEjemplar, "No disponible");
+            }
+            
+            return idPrestamo;
+        }
+        
+        // Método privado para actualizar el estado del ejemplar
+        private void ActualizarEstadoEjemplar(string connString, int idEjemplar, string nuevoEstado)
+        {
+            SqlParameter[] Parametros = new SqlParameter[2];
+            Parametros[0] = new SqlParameter("@id_ejemplar", SqlDbType.Int) { Value = idEjemplar };
+            Parametros[1] = new SqlParameter("@nuevo_estado", SqlDbType.NVarChar, 20) { Value = nuevoEstado };
+            
+            SqlHelper.ExecuteNonQuery(connString, CommandType.StoredProcedure, "update_estado_ejemplar", Parametros);
         }
     }
 }

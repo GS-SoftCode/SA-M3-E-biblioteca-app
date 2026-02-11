@@ -17,14 +17,9 @@ namespace biblioteca_app
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control txtTipoMulta.
+        /// Control ddlTipoMulta.
         /// </summary>
-        protected global::System.Web.UI.WebControls.TextBox txtTipoMulta;
-
-        /// <summary>
-        /// Control rfvTipoMulta.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvTipoMulta;
+        protected global::System.Web.UI.WebControls.DropDownList ddlTipoMulta;
 
         /// <summary>
         /// Control txtMonto.

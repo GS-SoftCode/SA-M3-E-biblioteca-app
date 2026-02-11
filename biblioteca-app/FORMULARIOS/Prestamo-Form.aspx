@@ -250,6 +250,24 @@
                     </div>
                 </div>
 
+                <!-- Separador y opción de crear desde reserva -->
+                <div style="border-top: 2px solid #e0e0e0; margin: 30px 0; padding-top: 30px;">
+                    <h3 style="font-size: 18px; font-weight: 600; color: #333; margin-bottom: 20px; text-align: center;">
+                        O crear préstamo desde una reserva activa
+                    </h3>
+                    
+                    <div class="form-group">
+                        <label for="ddlReservas">Reservas Activas</label>
+                        <asp:DropDownList ID="ddlReservas" runat="server" CssClass="form-control" AutoPostBack="true" OnSelectedIndexChanged="ddlReservas_SelectedIndexChanged">
+                        </asp:DropDownList>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="txtObservacionesReserva">Observaciones del Préstamo</label>
+                        <asp:TextBox ID="txtObservacionesReserva" runat="server" CssClass="form-control" placeholder="Observaciones adicionales para el préstamo desde reserva" MaxLength="200"></asp:TextBox>
+                    </div>
+                </div>
+
                 <div class="button-group">
                     <asp:Button ID="btnGuardar" runat="server" Text="Guardar" CssClass="btn btn-primary" OnClick="btnGuardar_Click" />
                 </div>
